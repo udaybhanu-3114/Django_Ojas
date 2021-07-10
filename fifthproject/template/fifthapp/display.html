@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>MSD</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/fifthapp.css"%}">
+</head>
+<body>
+	<div style="border:solid;width:20.5%;background-color:black">
+		<img src="{% static "images/msd.jpg"%}">
+	</div>
+	<div style="border:solid;width:78.5%;background-color:orange;float:right;
+	margin-top:-180px">
+		<center>
+		<h1>Hello: {{msg}}</h1>
+		<h1>The Server Time is: {{date}}</h1>
+		<h1>{{msg1}}</h1>
+	</center>
+	</div>
+	
+</body>
+</html>
