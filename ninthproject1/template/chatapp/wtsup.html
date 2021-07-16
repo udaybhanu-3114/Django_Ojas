@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+<head>
+	<title>MESSENGER</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/chatapp.css"%}">
+</head>
+<body>
+	<img src="{% static "images/whatsapp.jpg"%}">
+	<div style="background-color:cyan">
+	<marquee>
+		<h1>{{msg}}</h1>
+	</marquee>
+
+</body>
+</html>
