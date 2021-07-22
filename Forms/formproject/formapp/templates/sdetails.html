@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Student Page</h1>
+{% if stu %}
+<h1>Show Data</h1>
+{% for st in stu %}
+<h5>{{st.sid}}</h5>
+<h5>{{st.sname}}</h5>
+{% endfor %}
+{% else %}
+<h1>No Data</h1>
+{% endif %}
+
+</body>
+</html>
