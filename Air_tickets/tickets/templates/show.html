@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Booking</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+    </style>
+</head>
+
+<body style="background-color:#BD8E11; text-align:center;">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div style="width: 100%; display: table;">
+            <h3>Book Your Tickets Here..!</h3>
+
+                    {{form.as_p}}
+                    <input type="submit" value="submit">
+                </div>
+            </div>
+        </div>
+    </form>
+        <div>
+
+
+            <table>
+                <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Ticket Number</th>
+                    <th>No.of Tickets</th>
+                    <th>Seat.No</th>
+                </tr>
+                </thead>
+                <tbody>
+            {% for data in book %}
+                <tr>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.gender }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{data.From}}</td>
+                    <td>{{data.To}}</td>
+                    <td>{{data.ticket_no}}</td>
+                    <td>{{data.no_of_tickets}}</td>
+                    <td>{{data.seat_no}}</td>
+                    <td>
+                        <a href="/edit/{{ data.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ data.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+
+</html>
