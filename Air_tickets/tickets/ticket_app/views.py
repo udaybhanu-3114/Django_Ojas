@@ -9,26 +9,29 @@ from django.shortcuts import render
 from .forms import SignupForm
 # Create your views here.
 def show(request):
-    if request.method == 'POST':
-        form = Air_Ticket(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            From = form.cleaned_data['From']
-            To = form.cleaned_data['To']
-            email = form.cleaned_data['email']
-            ticket_no = form.cleaned_data['ticket_no']
-            no_of_tickets = form.cleaned_data['no_of_tickets']
-            gender = form.cleaned_data['gender']
-            age = form.cleaned_data['age']
-            seat_no = form.cleaned_data['seat_no']
-            reg_data = AirTicketModel(name=name,From=From,To=To,email=email,ticket_no=ticket_no,no_of_tickets=no_of_tickets,seat_no=seat_no,gender=gender,age=age)
-            reg_data.save()
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = Air_Ticket(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data['name']
+                From = form.cleaned_data['From']
+                To = form.cleaned_data['To']
+                email = form.cleaned_data['email']
+                ticket_no = form.cleaned_data['ticket_no']
+                no_of_tickets = form.cleaned_data['no_of_tickets']
+                gender = form.cleaned_data['gender']
+                age = form.cleaned_data['age']
+                seat_no = form.cleaned_data['seat_no']
+                reg_data = AirTicketModel(name=name,From=From,To=To,email=email,ticket_no=ticket_no,no_of_tickets=no_of_tickets,seat_no=seat_no,gender=gender,age=age)
+                reg_data.save()
+                form = Air_Ticket()
+        else:
             form = Air_Ticket()
-    else:
-        form = Air_Ticket()
-    booking = AirTicketModel.objects.all()
+        booking = AirTicketModel.objects.all()
 
-    return render(request, 'show.html', {'form': form, 'book':booking})
+        return render(request, 'show.html', {'form': form, 'book':booking})
+    else:
+        return HttpResponseRedirect('/login')
 
 def update_ticket(request, id):
     ticket = AirTicketModel.objects.get(pk=id)
@@ -79,12 +82,14 @@ def user_login(request):
         return HttpResponseRedirect('/show')
 
 
-def user_profile(request):
-    if request.user.is_authenticated:
-        return render(request,'show.html',{'name':request.user})
-    else:
-        return HttpResponseRedirect('/login')
+# def user_profile(request):
+#     if request.user.is_authenticated:
+#         return render(request,'show.html',{'name':request.user})
+#     else:
+#         return HttpResponseRedirect('/login')
 
+def home(request):
+    return render(request,'home.html')
 
 def user_logout(request):
     logout(request)

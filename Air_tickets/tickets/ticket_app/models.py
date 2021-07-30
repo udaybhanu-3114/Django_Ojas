@@ -14,5 +14,5 @@ class AirTicketModel(models.Model):
     To = models.CharField(max_length=30)
     ticket_no = models.IntegerField()
     no_of_tickets = models.IntegerField()
-    seat_no = models.IntegerField()
+
 
