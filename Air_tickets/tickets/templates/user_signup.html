@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<form action="" method="POST">
+<body style="background-image:url({% static 'images/pic9.jpg' %}); background-size:100%; text-align:center;">
+<form action="" method="POST" style="color:white">
     {% csrf_token %}
     {% if form.non_field_errors %}
     {% for error in form.non_field_errors %}

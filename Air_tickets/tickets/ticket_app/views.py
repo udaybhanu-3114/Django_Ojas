@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import SignupForm
+from datetime import datetime, timedelta
 # Create your views here.
 def show(request):
     if request.user.is_authenticated:
@@ -21,8 +22,7 @@ def show(request):
                 no_of_tickets = form.cleaned_data['no_of_tickets']
                 gender = form.cleaned_data['gender']
                 age = form.cleaned_data['age']
-                seat_no = form.cleaned_data['seat_no']
-                reg_data = AirTicketModel(name=name,From=From,To=To,email=email,ticket_no=ticket_no,no_of_tickets=no_of_tickets,seat_no=seat_no,gender=gender,age=age)
+                reg_data = AirTicketModel(name=name,From=From,To=To,email=email,ticket_no=ticket_no,no_of_tickets=no_of_tickets,gender=gender,age=age)
                 reg_data.save()
                 form = Air_Ticket()
         else:
@@ -94,3 +94,40 @@ def home(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login')
+
+def setcookie(request):
+
+ response = render(request, 'setcookie.html')
+ #response.set_cookie('name','sonam')
+ #response.set_cookie('name','sonam',max_age=120)
+ response.set_cookie('lname', 'Jha', expires=datetime.utcnow()+timedelta(days=2))
+ return response
+
+def getcookie(request):
+  name = request.COOKIES['name']
+ # name = request.COOKIES.get('name')
+# name = request.COOKIES.get('name', "Guest")
+  return render(request, 'getcookie.html', {'name':name})
+
+def delcookie(request):
+ reponse = render(request, 'delcookie.html')
+ reponse.delete_cookie('name')
+ return reponse
+
+def getsession(request):
+    name = request.session['name']
+    movie_name = request.session['city_name']
+    # name = request.session.get('name', default = 'Guest')
+    # keys = request.session.keys()
+    # key = request.session.items()
+    # age = request.session.setdefault('age', '36')
+    request.session.modified = True
+    context = {'name': name, 'city_name': city_name}
+    return render(request, 'getsession.html',context )
+
+def delsession(request):
+    # if 'name' in request.session:
+    #     del request.session['name']
+    request.session.flush()
+    request.session.clear_expired()
+    return render(request, 'delsession.html')
