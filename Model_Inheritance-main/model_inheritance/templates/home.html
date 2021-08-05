@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        thead,tr,td,table{
+            border:2px solid black;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>
+        Home!
+    </h1>
+    <br><br><br>
+    <table>
+        <thead>
+            <th>Student-ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Place</th>
+        </thead>
+        <tbody>
+            {% for ob in obj %}
+            <tr>
+                <td>{{ ob.st_id }}</td>
+                <td>{{ ob.name }}</td>
+                <td>{{ ob.age }}</td>
+                <td>{{ ob.place }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br><br>
+
+
+</center>
+</body>
+</html>
